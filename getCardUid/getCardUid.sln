@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.62
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bioLectora", "bioLectora.csproj", "{5B7839DA-4869-454D-910D-92BC1CB429E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpringCardPCSC", "..\SpringCardPCSC\SpringCardPCSC.csproj", "{CE30EC6E-C60A-42C5-A200-FFE5B10AC2FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5B7839DA-4869-454D-910D-92BC1CB429E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B7839DA-4869-454D-910D-92BC1CB429E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B7839DA-4869-454D-910D-92BC1CB429E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B7839DA-4869-454D-910D-92BC1CB429E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE30EC6E-C60A-42C5-A200-FFE5B10AC2FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE30EC6E-C60A-42C5-A200-FFE5B10AC2FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE30EC6E-C60A-42C5-A200-FFE5B10AC2FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE30EC6E-C60A-42C5-A200-FFE5B10AC2FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1FC5F96-8B57-4A28-B9CA-2F7FCF912374}
+	EndGlobalSection
+EndGlobal
