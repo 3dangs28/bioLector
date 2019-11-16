@@ -42,6 +42,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lblCedula = new System.Windows.Forms.Label();
+            this.pctFoto = new System.Windows.Forms.PictureBox();
             this.btnGuardarUid = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
@@ -52,14 +53,13 @@
             this.lblMonto = new System.Windows.Forms.Label();
             this.lblEstatus = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
-            this.pctFoto = new System.Windows.Forms.PictureBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.pctColor = new System.Windows.Forms.PictureBox();
             this.btnConfig = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctColor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -194,6 +194,15 @@
             this.lblCedula.TabIndex = 29;
             this.lblCedula.Text = "00-00-0000-00000";
             // 
+            // pctFoto
+            // 
+            this.pctFoto.Image = global::getCardUid.Properties.Resources.atleta;
+            this.pctFoto.Location = new System.Drawing.Point(14, 18);
+            this.pctFoto.Name = "pctFoto";
+            this.pctFoto.Size = new System.Drawing.Size(207, 241);
+            this.pctFoto.TabIndex = 14;
+            this.pctFoto.TabStop = false;
+            // 
             // btnGuardarUid
             // 
             this.btnGuardarUid.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -309,15 +318,6 @@
             this.lblId.TabIndex = 25;
             this.lblId.Text = "Identificación:";
             // 
-            // pctFoto
-            // 
-            this.pctFoto.Image = global::getCardUid.Properties.Resources.atleta;
-            this.pctFoto.Location = new System.Drawing.Point(14, 18);
-            this.pctFoto.Name = "pctFoto";
-            this.pctFoto.Size = new System.Drawing.Size(207, 241);
-            this.pctFoto.TabIndex = 14;
-            this.pctFoto.TabStop = false;
-            // 
             // btnRefresh
             // 
             this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
@@ -355,17 +355,19 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnConfig);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "BioLectora";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

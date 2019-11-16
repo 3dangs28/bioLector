@@ -18,21 +18,21 @@ namespace getCardUid
             InitializeComponent();
             //    pctColor.BackColor = Color.FromArgb(255, 0, 0);
 
-          
-             txtSource.Text = "10.2.7.11";
-             txtCatalog.Text = "OfiELE_mvpsportcity_ofiele_es";
-             txtUser.Text = "sa";
-             txtPass.Text = "sqladmin";
-             txtRuta.Text = @"C:\Users\AngelGarcia\Desktop\investigacion\"; 
-             
-
             /*
+              txtSource.Text = "10.2.7.11";
+              txtCatalog.Text = "OfiELE_mvpsportcity_ofiele_es";
+              txtUser.Text = "sa";
+              txtPass.Text = "sqladmin";
+              txtRuta.Text = @"C:\Users\AngelGarcia\Desktop\investigacion\"; 
+               */
+
+
             txtSource.Text = "192.168.1.100";
-            txtCatalog.Text = "prueba-mvp";
-            txtUser.Text = "sa";
-            txtPass.Text = "123";
-            txtRuta.Text = @"C:\Users\Administrador\Pictures\img\";
-            */
+             txtCatalog.Text = "prueba-mvp";
+             txtUser.Text = "sa";
+             txtPass.Text = "123";
+             txtRuta.Text = @"C:\Users\Administrador\Pictures\img\";
+            
         }
 
         private void BtnGuardar_Click(object sender, EventArgs e)

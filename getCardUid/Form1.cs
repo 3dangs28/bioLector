@@ -85,8 +85,8 @@ namespace getCardUid
 
         public void SelectDevice()
         {
-            List<string> availableReaders = this.ListReaders();
-
+            // List<string> availableReaders = new List<string>(new string[] {"lala"}) ;//this.ListReaders();
+            List<string> availableReaders =this.ListReaders();
             this.RdrState = new Card.SCARD_READERSTATE();
             readername = availableReaders[0].ToString();//selecting first device
             this.RdrState.RdrName = readername;
