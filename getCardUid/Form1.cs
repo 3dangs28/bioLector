@@ -358,7 +358,8 @@ namespace getCardUid
 
 
                 pctColor.BackColor = Color.FromArgb(121, 174, 235);
-                pctFoto.Image = new Bitmap(@"C:\Users\AngelGarcia\Desktop\investigacion\8-1020-818.jpg");
+                pctFoto.Image = Properties.Resources.lala;
+               // pctFoto.Image = new Bitmap(@"C:\Users\AngelGarcia\Desktop\investigacion\8-1020-818.jpg");
                 pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
 
 

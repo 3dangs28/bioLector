@@ -36,31 +36,31 @@
             this.lblCardAtr = new System.Windows.Forms.Label();
             this.lblCardUid = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.lblCardType = new System.Windows.Forms.TextBox();
             this.lblProtocol = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.pctFoto = new System.Windows.Forms.PictureBox();
-            this.btnConfig = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
-            this.pctColor = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblCedula = new System.Windows.Forms.Label();
             this.btnGuardarUid = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtCedula = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lblTotal = new System.Windows.Forms.Label();
             this.lblMonto = new System.Windows.Forms.Label();
             this.lblEstatus = new System.Windows.Forms.Label();
             this.lblId = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lblCedula = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctColor)).BeginInit();
+            this.pctFoto = new System.Windows.Forms.PictureBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.pctColor = new System.Windows.Forms.PictureBox();
+            this.btnConfig = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctColor)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -130,16 +130,6 @@
             this.label6.TabIndex = 6;
             this.label6.Text = "UID:";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
-            this.btnRefresh.Location = new System.Drawing.Point(484, 14);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(27, 30);
-            this.btnRefresh.TabIndex = 8;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // lblCardType
             // 
             this.lblCardType.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -172,25 +162,6 @@
             this.label7.Text = "Protocolo:";
             this.label7.Visible = false;
             // 
-            // pctFoto
-            // 
-            this.pctFoto.Image = global::getCardUid.Properties.Resources.atleta;
-            this.pctFoto.Location = new System.Drawing.Point(14, 18);
-            this.pctFoto.Name = "pctFoto";
-            this.pctFoto.Size = new System.Drawing.Size(207, 241);
-            this.pctFoto.TabIndex = 14;
-            this.pctFoto.TabStop = false;
-            // 
-            // btnConfig
-            // 
-            this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
-            this.btnConfig.Location = new System.Drawing.Point(991, 2);
-            this.btnConfig.Name = "btnConfig";
-            this.btnConfig.Size = new System.Drawing.Size(57, 51);
-            this.btnConfig.TabIndex = 15;
-            this.btnConfig.UseVisualStyleBackColor = true;
-            this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -200,14 +171,6 @@
             this.label4.Size = new System.Drawing.Size(251, 25);
             this.label4.TabIndex = 16;
             this.label4.Text = "Sistema de identificación";
-            // 
-            // pctColor
-            // 
-            this.pctColor.Location = new System.Drawing.Point(301, 24);
-            this.pctColor.Name = "pctColor";
-            this.pctColor.Size = new System.Drawing.Size(30, 20);
-            this.pctColor.TabIndex = 18;
-            this.pctColor.TabStop = false;
             // 
             // groupBox1
             // 
@@ -220,6 +183,16 @@
             this.groupBox1.TabIndex = 19;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ATLETA";
+            // 
+            // lblCedula
+            // 
+            this.lblCedula.AutoSize = true;
+            this.lblCedula.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCedula.Location = new System.Drawing.Point(49, 268);
+            this.lblCedula.Name = "lblCedula";
+            this.lblCedula.Size = new System.Drawing.Size(127, 16);
+            this.lblCedula.TabIndex = 29;
+            this.lblCedula.Text = "00-00-0000-00000";
             // 
             // btnGuardarUid
             // 
@@ -286,6 +259,18 @@
             this.groupBox2.TabIndex = 25;
             this.groupBox2.TabStop = false;
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.lblTotal);
+            this.groupBox3.Controls.Add(this.lblMonto);
+            this.groupBox3.Controls.Add(this.lblEstatus);
+            this.groupBox3.Location = new System.Drawing.Point(12, 513);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(490, 119);
+            this.groupBox3.TabIndex = 26;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Respuesta:";
+            // 
             // lblTotal
             // 
             this.lblTotal.AutoSize = true;
@@ -324,33 +309,48 @@
             this.lblId.TabIndex = 25;
             this.lblId.Text = "Identificación:";
             // 
-            // groupBox3
+            // pctFoto
             // 
-            this.groupBox3.Controls.Add(this.lblTotal);
-            this.groupBox3.Controls.Add(this.lblMonto);
-            this.groupBox3.Controls.Add(this.lblEstatus);
-            this.groupBox3.Location = new System.Drawing.Point(12, 513);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(490, 119);
-            this.groupBox3.TabIndex = 26;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Respuesta:";
+            this.pctFoto.Image = global::getCardUid.Properties.Resources.atleta;
+            this.pctFoto.Location = new System.Drawing.Point(14, 18);
+            this.pctFoto.Name = "pctFoto";
+            this.pctFoto.Size = new System.Drawing.Size(207, 241);
+            this.pctFoto.TabIndex = 14;
+            this.pctFoto.TabStop = false;
             // 
-            // lblCedula
+            // btnRefresh
             // 
-            this.lblCedula.AutoSize = true;
-            this.lblCedula.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCedula.Location = new System.Drawing.Point(49, 268);
-            this.lblCedula.Name = "lblCedula";
-            this.lblCedula.Size = new System.Drawing.Size(127, 16);
-            this.lblCedula.TabIndex = 29;
-            this.lblCedula.Text = "00-00-0000-00000";
+            this.btnRefresh.Image = ((System.Drawing.Image)(resources.GetObject("btnRefresh.Image")));
+            this.btnRefresh.Location = new System.Drawing.Point(484, 14);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(27, 30);
+            this.btnRefresh.TabIndex = 8;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // pctColor
+            // 
+            this.pctColor.Location = new System.Drawing.Point(301, 24);
+            this.pctColor.Name = "pctColor";
+            this.pctColor.Size = new System.Drawing.Size(30, 20);
+            this.pctColor.TabIndex = 18;
+            this.pctColor.TabStop = false;
+            // 
+            // btnConfig
+            // 
+            this.btnConfig.Image = ((System.Drawing.Image)(resources.GetObject("btnConfig.Image")));
+            this.btnConfig.Location = new System.Drawing.Point(991, 2);
+            this.btnConfig.Name = "btnConfig";
+            this.btnConfig.Size = new System.Drawing.Size(57, 51);
+            this.btnConfig.TabIndex = 15;
+            this.btnConfig.UseVisualStyleBackColor = true;
+            this.btnConfig.Click += new System.EventHandler(this.BtnConfig_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1052, 748);
+            this.ClientSize = new System.Drawing.Size(1052, 733);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.label4);
@@ -359,14 +359,14 @@
             this.Text = "BioLectora";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pctColor)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pctFoto)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctColor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
