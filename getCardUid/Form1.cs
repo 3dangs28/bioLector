@@ -8,12 +8,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SpringCard.PCSC;
+using System.IO;
 using System.Data.SqlClient;
+using System.Drawing.Imaging;
 
 namespace getCardUid
 {
+   
     public partial class Form1 : Form
     {
+        private DPFP.Template Template;
+
         private SCardReader reader = null;      // The reader's object
         private SCardChannel channel = null;    // A channel to the reader and card
         private Dictionary<string, string> cardsNames = new Dictionary<string, string>();
@@ -32,7 +37,7 @@ namespace getCardUid
         public byte[] SendBuff = new byte[263];
         public byte[] RecvBuff = new byte[263];
         public int SendLen, RecvLen, nBytesRet, reqType, Aprotocol, dwProtocol, cbPciLength;
-
+        int bandera = 0;
 
         private Card.SCARD_READERSTATE RdrState;
 
@@ -41,6 +46,9 @@ namespace getCardUid
             InitializeComponent();
             SelectDevice();
             establishContext();
+         //   pctFeliz.Image = Properties.Resources.caraFeliz;
+            btnSubirImagenBio.Visible = false;
+            btnGuardarHuella.Visible = false;
         }
 
 
@@ -244,47 +252,188 @@ namespace getCardUid
             
         }
 
-        private void BtnGuardarUid_Click(object sender, EventArgs e)
+
+
+
+        //zona biometrica
+        private void BtnSubirImagenBio_Click(object sender, EventArgs e)
         {
-            string aux = "Data Source=" + conexion.Fuente + ";Initial Catalog=" + conexion.Catalogo + ";User ID=" + conexion.User + ";Password=" + conexion.Password + "";
-            //   string aux = "Data Source=" + conexion.Fuente + ";Initial Catalog=" + conexion.Catalogo + ";integrated security = true;";
-            SqlConnection conn = new SqlConnection(aux);
-            conn.Open();
-
-
-            SqlCommand cmd = new SqlCommand();
-            cmd.Connection = conn;
-
-            cmd.CommandType = CommandType.StoredProcedure;
-            cmd.CommandText = "insert_info";
-
-
-        
-            cmd.Parameters.Add(new SqlParameter("@cedula", SqlDbType.VarChar)).Value = txtCedula.Text;
-            cmd.Parameters.Add(new SqlParameter("@brazalete", SqlDbType.VarChar)).Value =lblCardUid.Text;
-            cmd.Parameters.Add(new SqlParameter("@mensaje", SqlDbType.VarChar)).Value = "";
-            //devuelve el valor del stores
-            cmd.Parameters["@mensaje"].Direction = ParameterDirection.Output;
-
-
-            int res = cmd.ExecuteNonQuery();
-            string gato = Convert.ToString(cmd.Parameters["@mensaje"].Value);
-
-            if (res > 0)
+            // open file dialog   
+            OpenFileDialog open = new OpenFileDialog();
+            // Filtro de imagenes   
+            open.Filter = "Image Files(*.jpg; *.jpeg; *.gif; *.bmp; *.png)|*.jpg; *.jpeg; *.gif; *.bmp; *.png";
+            if (open.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show("Usuario insertado satisfactoriamente,  " + gato);
-            }
-            else
-            {
-                MessageBox.Show("No insertado");
-                MessageBox.Show(res + "");
-            }
 
-            conn.Close();
-            // se coloca el template en null para volver hacer otra lectura
+                // muestra la imagen en el pictureBox
+                pctFoto.Image = new Bitmap(open.FileName);
+                pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+             
+                //guarda la extensión de la imagen
+
+                string ext = Path.GetExtension(open.FileName);
+                //  MessageBox.Show(ext);
+                //    ext = ext.ToLower();
+
+                // Guarda en un string la ruta
+                string ruta = conexion.RutaImg;
+
+                // ruta de la imagen captada
+                lblRutaBio.Text = open.FileName;
+                pctFoto.Image.Save(ruta + txtCedula.Text + ext, ImageFormat.Jpeg);
+    
+                conexion.Cedula = txtCedula.Text;
+                MessageBox.Show("La imagen ha sido cargada satisfactoriamente!");
+                bandera = 1;
+            }
+        }
+
+        private void BtnHuella_Click(object sender, EventArgs e)
+        {
+
+
+            capturarHuella capturar = new capturarHuella();
+            capturar.OnTemplate += this.OnTemplate;
+            capturar.ShowDialog();
+        }
+
+        public void SetText(string str) {
+
+            lblPruebas.Text = str;
+        }
+
+
+        private void OnTemplate(DPFP.Template template)
+        {
+            this.Invoke(new Function(delegate ()
+            {
+                Template = template;
+               
+                btnGuardarHuella.Enabled = (Template != null);
+                btnSubirImagenBio.Enabled = (Template != null);
+                btnSubirImagenBio.Visible = true;
+                btnGuardarHuella.Visible = true;
+             
+
+                if (Template != null)
+                {
+                    MessageBox.Show("La imprensión de huella esta verificada y lista para su captura.", "Impresión de huella");
+                    lblRutaBio.Text = "Huella fue capturada correctamente";
+                    txtCedula.Text = conexion.Cedula;
+   
+
+                }
+                else
+                {
+                    MessageBox.Show("La impresión no es valida. Vuelva a repetir la impresión.", "Impresión de huella");
+                }
+            }));
+        }
+
+        private void BtnGuardarHuella_Click(object sender, EventArgs e)
+        {
+            byte[] streamHuella = Template.Bytes;
+
+
+            if (txtCedula.Text == "") {
+                MessageBox.Show("Por favor llene espacio de la cédula.");
+            }
+            else if (lblUid2.Text == "") {
+                MessageBox.Show("Por favor acerque el brazalete para su captura");
+            }
+            else if (bandera==0) {
+                MessageBox.Show("Por favor suba la imagen del atleta.");
+            }
+            else {
+                string gato = "";
+                string aux = "Data Source=" + conexion.Fuente + ";Initial Catalog=" + conexion.Catalogo + ";User ID=" + conexion.User + ";Password=" + conexion.Password + "";
+                //   string aux = "Data Source=" + conexion.Fuente + ";Initial Catalog=" + conexion.Catalogo + ";integrated security = true;";
+                SqlConnection conn = new SqlConnection(aux);
+                conn.Open();
+
+
+                SqlCommand cmd = new SqlCommand();
+                cmd.Connection = conn;
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.CommandText = "insert_info";
+
+
+                // @salida
+
+                //pase de parametros a proceso de almacenamiento
+                cmd.Parameters.Add(new SqlParameter("@cedula", SqlDbType.VarChar)).Value = txtCedula.Text;
+                cmd.Parameters.Add(new SqlParameter("@huellero", SqlDbType.VarBinary)).Value = streamHuella;
+                cmd.Parameters.Add(new SqlParameter("@brazalete", SqlDbType.VarChar)).Value = lblUid2.Text;
+                cmd.Parameters.Add(new SqlParameter("@mensaje", SqlDbType.VarChar)).Value = "";
+                //devuelve el valor del stores
+                cmd.Parameters["@mensaje"].Direction = ParameterDirection.Output;
+
+
+                int res = cmd.ExecuteNonQuery();
+                gato = Convert.ToString(cmd.Parameters["@mensaje"].Value);
+                switch (gato) {
+                    case "Y":
+                        gato = "Ya tiene una huella registrada";
+                        break;
+                    case "S":
+                        gato = "Se inserto exitosamente el registro";
+                        break;
+                    case "N":
+                        gato = "No esta registrado en el sistema";
+                        break;
+                    default:
+                        MessageBox.Show("Fuera de rango");
+                        break;
+                }
+
+                if (res > 0)
+                {
+                    MessageBox.Show("Usuario insertado satisfactoriamente,  " + gato);
+                }
+                else
+                {
+                    MessageBox.Show("No insertado");
+                    MessageBox.Show(res + "");
+                }
+
+                conn.Close();
+                // se coloca el template en null para volver hacer otra lectura
+                Template = null;
+
+                btnSubirImagenBio.Enabled = false;
+                btnGuardarHuella.Enabled = false;
+                btnSubirImagenBio.Visible = false;
+                btnGuardarHuella.Visible = false;
+
+                bandera = 0;
+
+            }
+          
 
 
         }
+
+        private void BtnVerificar_Click(object sender, EventArgs e)
+        {
+            verificarHuella verificar = new verificarHuella();
+            verificar.ShowDialog();
+
+        }
+
+
+        //fin zona biometrica
+
+
+
+
+
+
+
+
+
+
+
 
         private void cbReaders_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -336,15 +485,13 @@ namespace getCardUid
             lblCardType.Text = "";
             lblProtocol.Text = "";
 
-            lblCedula.Text = "Cédula: ";
-            lblId.Text = "Identificación: ";
-            lblEstatus.Text = "Cobrado: ";
-            lblTotal.Text = "Total: ";
-            lblMonto.Text = "Retraso: ";
+      
             lblMonto.BackColor = Color.FromArgb(240, 240, 240);
 
             pctColor.BackColor = Color.FromArgb(255, 0, 0);
-            pctFoto.Image = Properties.Resources.atleta;
+
+
+          //  pctFoto.Image = Properties.Resources.atleta;
 
 
             lblStatus.Text = SCARD.ReaderStatusToString(readerState);
@@ -355,18 +502,22 @@ namespace getCardUid
                 channel = new SCardChannel(reader);
 
 
-
-
                 pctColor.BackColor = Color.FromArgb(121, 174, 235);
-                pctFoto.Image = Properties.Resources.lala;
-               // pctFoto.Image = new Bitmap(@"C:\Users\AngelGarcia\Desktop\investigacion\8-1020-818.jpg");
-                pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
+          
+              //   pctFoto.Image = Properties.Resources.atleta;
+             //    pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
 
+              
+                    lblCedula.Text = "Cédula: ";
+                    lblId.Text = "Identificación: ";
+                    lblEstatus.Text = "Cobrado: ";
+                    lblTotal.Text = "Total: ";
+                    lblMonto.Text = "Retraso: ";
+                    lblNombreNino.Text = "";
+                    lblDeporteNino.Text = "";
 
-            
-                  
-
-               
+                    pctFoto.Image = Properties.Resources.atleta;
+                    pctCara.Image = Properties.Resources.blanco;
 
                 if (!channel.Connect())
                 {
@@ -376,11 +527,14 @@ namespace getCardUid
                 }
                 CAPDU capdu = new CAPDU(0xFF, 0xCA, 0x00, 0x00);    // Command sent to the reader
                 RAPDU rapdu = channel.Transmit(capdu);              // Response sent from card
-
+                
                 if (connectCard())
                 {
                     string cardUID = getcardUID();
                     lblCardUid.Text = cardUID;
+                    lblUid2.Text = cardUID;
+                    lblST.Text = "OK";
+                    lblST.ForeColor = Color.FromArgb(34, 177, 76);
 
 
 
@@ -402,12 +556,17 @@ namespace getCardUid
                         while (dr.Read())
                         {
 
+                            //   pctFoto.Image = Properties.Resources.lala;
+                           pctFoto.Image = new Bitmap(conexion.RutaImg + dr[1].ToString() + ".jpg");
+                           pctFoto.SizeMode = PictureBoxSizeMode.StretchImage;
 
                             lblId.Text = "Identificación: " + dr[0].ToString();
                             lblCedula.Text = "Cédula: " + dr[1].ToString();
                             lblTotal.Text = " Total: B/. " + dr[3].ToString();
                             lblEstatus.Text = "Cobrado:  B/. " + dr[4].ToString() + "  " + "Pendiente: B/. " + dr[5].ToString();
 
+                            lblNombreNino.Text = dr[0].ToString();
+                            lblDeporteNino.Text = dr[2].ToString();
 
                             string monto = dr[10].ToString();
                             lblMonto.Text = "Retraso: " + monto + "  Meses";
@@ -416,23 +575,24 @@ namespace getCardUid
                                 case "1":
                                     // celeste
                                     lblMonto.ForeColor = Color.FromArgb(121, 174, 235);
-
+                                    pctCara.Image = Properties.Resources.caraFeliz;
                                     break;
                                 case "2":
                                     // amarillo
                                     lblMonto.BackColor = Color.FromArgb(255, 247, 0);
+                                    pctCara.Image = Properties.Resources.caraTriste;
+                                    //  pctFoto.
                                     break;
                                 case "3":
                                     // rojo
                                     lblMonto.ForeColor = Color.FromArgb(255, 0, 0);
+                                    pctCara.Image = Properties.Resources.llorando;
                                     break;
-                                case "4":
-                                    // rojo
-                                    lblMonto.ForeColor = Color.FromArgb(255, 0, 0);
-                                    break;
+                          
                                 // rojo
                                 default:
                                     lblMonto.ForeColor = Color.FromArgb(255, 0, 0);
+                                    pctCara.Image = Properties.Resources.blanco;
                                     break;
                             }
 
@@ -505,6 +665,8 @@ namespace getCardUid
                 }
                 else
                 {
+
+                
                     lblCardType.Text = "Smartcard";
                 }
             }                

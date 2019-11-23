@@ -54,6 +54,22 @@
     <ApplicationIcon>intalador.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DPFPDevNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=696774c42ee28c57, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPDevNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPEngNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=7fe76e7adf19964b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPEngNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPShrNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=d902fe275a8d6cf2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPShrNET.dll</HintPath>
+    </Reference>
+    <Reference Include="DPFPVerNET, Version=1.6.1.0, Culture=neutral, PublicKeyToken=4de0a9c4dcc83984, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Program Files\DigitalPersona\One Touch SDK\.NET\Bin\DPFPVerNET.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -67,6 +83,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="capturarHuella.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="capturarHuella.Designer.cs">
+      <DependentUpon>capturarHuella.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CaptureForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CaptureForm.Designer.cs">
+      <DependentUpon>CaptureForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Card.cs" />
     <Compile Include="conexion.cs" />
     <Compile Include="Form1.cs">
@@ -77,27 +105,36 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ventaConfig.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ventaConfig.Designer.cs">
       <DependentUpon>ventaConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="verificarHuella.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="verificarHuella.Designer.cs">
+      <DependentUpon>verificarHuella.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="ventaConfig.resx">
       <DependentUpon>ventaConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="verificarHuella.resx">
+      <DependentUpon>verificarHuella.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -119,8 +156,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\atleta.png" />
+    <None Include="img\blanco.png" />
+    <Content Include="img\caraFeliz.png" />
+    <Content Include="img\caraTriste.png" />
     <Content Include="img\iwuk.png" />
     <Content Include="img\lala.png" />
+    <None Include="img\llorando.png" />
     <Content Include="intalador.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
