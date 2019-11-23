@@ -116,6 +116,12 @@
     <Compile Include="ventaConfig.Designer.cs">
       <DependentUpon>ventaConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="ventanaCara.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ventanaCara.Designer.cs">
+      <DependentUpon>ventanaCara.cs</DependentUpon>
+    </Compile>
     <Compile Include="verificarHuella.cs">
       <SubType>Form</SubType>
     </Compile>
